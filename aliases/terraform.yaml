@@ -1,17 +1,18 @@
 ---
-name: "chatops.terraform_local"
-action_ref: "terraform.command_local"
-description: "Run Terraform command on local machine"
+name: chatops.terraform
+action_ref: st2_chatops_aliases.terraform
+description: Draws a cow that says what you want
 formats:
-  - display: "terraform <command>"
+  - display: "terraform <arg>"
     representation:
-      - "terraform {{ args }}"
+      - "terraform {{ arg }}"
+ack:
+  enabled: false
 result:
   format: |
-    Terraform command `{{ execution.parameters.args }}` result: {~}
-    {% if execution.result.stderr %}*Stdout:* {% endif %}
-    ```{{ execution.result.stdout }}```
-    {% if execution.result.stderr %}*Stderr:* ```{{ execution.result.stderr }}```{% endif %}
-  extra:
-    slack:
-      color: "{% if execution.result.succeeded %}good{% else %}danger{% endif %}"
+    {% if execution.status == 'succeeded' %}Here is your cow: ```{{ execution.result.stdout }}``` {~}{% else %}
+    Sorry, no cows this time {~}
+    Exit Code: `{{ execution.result.return_code }}`
+    Stderr: ```{{ execution.result.stderr }}```
+    Hint: Make sure `terraform` utility is installed.
+    {% endif %}
