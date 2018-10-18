@@ -10,7 +10,7 @@ ack:
   enabled: false
 result:
   format: |
-    {% if execution.status == 'succeeded' %}Here is your cow: ```{{ execution.result.stdout }}``` {~}{% else %}
+    {% if execution.status == 'succeeded' %}Here is your output: ```{{ execution.result.stdout }}``` {~}{% else %}
     Sorry, no command this time {~}
     Exit Code: `{{ execution.result.return_code }}`
     Stderr: ```{{ execution.result.stderr }}```
