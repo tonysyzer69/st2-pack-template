@@ -14,7 +14,3 @@ parameters:
     type: string
     immutable: true
     default: "/usr/bin/terraform-plan"
-  command:
-    description: "plan/apply/show"
-    type: string
-    required: true

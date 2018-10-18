@@ -3,9 +3,9 @@ name: chatops.terraform
 action_ref: st2_chatops_aliases.terraform
 description: terraform
 formats:
-  - display: "terraform <command>"
+  - display: "terraform"
     representation:
-      - "terraform {{ command }}"
+      - "terraform"
 ack:
   enabled: false
 result:
