@@ -1,0 +1,13 @@
+---
+name: terraform
+description: Draws a cow that says what you want
+runner_type: local-shell-cmd
+entry_point: ""
+enabled: true
+parameters:
+  kwarg_op:
+    immutable: true
+  cmd:
+    description: "Command to run"
+    type: string
+    default: "/usr/bin/terraform {{arg}}"
