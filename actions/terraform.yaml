@@ -13,7 +13,7 @@ parameters:
     description: "Command to run"
     type: string
     immutable: true
-    default: "cd /tmp/fos-grid; /usr/bin/terraform {{command}}"
+    default: "cd /tmp/fos-grid && /usr/bin/terraform {{command}}"
   command:
     description: "plan/apply/show"
     type: string
