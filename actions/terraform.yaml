@@ -1,6 +1,6 @@
 ---
-name: terraform
-description: terraform
+name: terraform-plan
+description: terraform-plan
 runner_type: local-shell-cmd
 entry_point: ""
 enabled: true

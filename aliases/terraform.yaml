@@ -1,11 +1,11 @@
 ---
-name: chatops.terraform
-action_ref: st2_chatops_aliases.terraform
-description: terraform
+name: chatops.terraform-plan
+action_ref: st2_chatops_aliases.terraform-plan
+description: terraform-plan
 formats:
-  - display: "terraform"
+  - display: "terraform-plan"
     representation:
-      - "terraform"
+      - "terraform-plan"
 ack:
   enabled: false
 result:
@@ -14,5 +14,5 @@ result:
     Sorry, no command this time {~}
     Exit Code: `{{ execution.result.return_code }}`
     Stderr: ```{{ execution.result.stderr }}```
-    Hint: Make sure `terraform` utility is installed.
+    Hint: Make sure `terraform-plan` utility is installed.
     {% endif %}
