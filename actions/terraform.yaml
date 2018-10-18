@@ -1,6 +1,6 @@
 ---
-name: cowsay
-description: Draws a cow that says what you want
+name: terraform
+description: terraform
 runner_type: local-shell-cmd
 entry_point: ""
 enabled: true
@@ -13,8 +13,8 @@ parameters:
     description: "Command to run"
     type: string
     immutable: true
-    default: "/usr/bin/terraform {{message}}"
-  message:
-    description: "Message to say"
+    default: "/usr/bin/terraform {{command}}"
+  command:
+    description: "plan/apply/show"
     type: string
     required: true
