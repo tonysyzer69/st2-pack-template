@@ -13,7 +13,7 @@ parameters:
     description: "Command to run"
     type: string
     immutable: true
-    default: "/usr/games/cowsay {{message}}"
+    default: "/usr/bin/terraform {{message}}"
   message:
     description: "Message to say"
     type: string
