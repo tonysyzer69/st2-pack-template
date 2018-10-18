@@ -1,14 +1,14 @@
 ---
-name: "chatops.ansible_local"
-action_ref: "ansible.command_local"
-description: "Run Ansible command on local machine"
+name: "chatops.terraform_local"
+action_ref: "terraform.command_local"
+description: "Run Terraform command on local machine"
 formats:
-  - display: "ansible <command>"
+  - display: "terraform <command>"
     representation:
-      - "ansible {{ args }}"
+      - "terraform {{ args }}"
 result:
   format: |
-    Ansible command `{{ execution.parameters.args }}` result: {~}
+    Terraform command `{{ execution.parameters.args }}` result: {~}
     {% if execution.result.stderr %}*Stdout:* {% endif %}
     ```{{ execution.result.stdout }}```
     {% if execution.result.stderr %}*Stderr:* ```{{ execution.result.stderr }}```{% endif %}
