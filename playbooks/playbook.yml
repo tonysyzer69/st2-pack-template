@@ -16,7 +16,7 @@
 
     - name: Applying Terraform Plan
       shell: |
-        git-crypt unlock /opt/stackstorm/packs/st2_chatops_aliases/playbooks/terraform-vsphere.pem
+        git-crypt unlock ~/.fos-gridvcenter01/terraform-vsphere.pem
         terraform init -var-file=~/.fos-gridvcenter01/terraform.tfvars
         terraform plan -var-file=~/.fos-gridvcenter01/terraform.tfvars
       register: command_result
