@@ -5,7 +5,7 @@ description: terraform_fos_gridvcenter01
 formats:
   - display: "terraform_fos_gridvcenter01 <command>"
     representation:
-      - "terraform_fos_gridvcenter01 {{command}}"
+      - "terraform_fos_gridvcenter01 {{ command }}"
 result:
   format: |
     terraform_fos_gridvcenter01 `{{ execution.parameters.package }}`: {~}
