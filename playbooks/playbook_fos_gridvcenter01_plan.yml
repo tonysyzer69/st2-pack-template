@@ -4,7 +4,7 @@
   connection: local
   tasks:
 
-    - name: Clone a private repository into /opt.
+    - name: Clone itservice
       git:
         repo: git@git.zooxlabs.com:zooxco/itservice.git
         version: master
