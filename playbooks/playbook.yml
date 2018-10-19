@@ -2,3 +2,15 @@
 - hosts: all
   roles:
     - haproxy
+
+  tasks:
+
+    - name: Applying Terraform Plan
+      command: "terraform plan"
+      register: command_result
+      args:
+        chdir: "/tmp/fos-grid"
+      tags:
+        - terraform_plan
+
+    - debug: msg="{{ command_result.stdout }}"
