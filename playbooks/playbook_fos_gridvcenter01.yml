@@ -11,11 +11,11 @@
         dest: /opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice
         accept_hostkey: yes
 
-    - name: Running Terraform {{ command }}
+    - name: Running Terraform {{ input1 }}
       shell: |
         git-crypt unlock ~/.fos-gridvcenter01/terraform-vsphere.pem
         terraform init -var-file=~/.fos-gridvcenter01/terraform.tfvars
-        terraform {{ command }} -var-file=~/.fos-gridvcenter01/terraform.tfvars
+        terraform {{ input1 }} -var-file=~/.fos-gridvcenter01/terraform.tfvars
       register: command_result
       args:
         chdir: "/opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice/terraform-vsphere/fos-gridvcenter01/lib"

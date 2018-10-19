@@ -16,7 +16,7 @@ parameters:
     description: "Command to run"
     immutable: true
     default: "/opt/stackstorm/virtualenvs/ansible/bin/ansible-playbook /opt/stackstorm/packs/${ST2_ACTION_PACK_NAME}/playbooks/playbook_fos_gridvcenter01.yml"
-  command:
-    description: "command"
+  input1:
+    description: "input1"
     type: string
     required: true
