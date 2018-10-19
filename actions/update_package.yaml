@@ -15,4 +15,4 @@ parameters:
   cmd:
     description: "Command to run"
     immutable: true
-    default: "/opt/stackstorm/virtualenvs/ansible/bin/ansible-playbook /opt/stackstorm/packs/${ST2_ACTION_PACK_NAME}/playbooks/playbook.yml"
+    default: "/opt/stackstorm/virtualenvs/ansible/bin/ansible-playbook /var/tmp/playbook.yml"
