@@ -1,0 +1,23 @@
+---
+- hosts: all
+  gather_facts: no
+  connection: local
+  tasks:
+
+    - name: Clone a private repository into /opt.
+      git:
+        repo: git@git.zooxlabs.com:zooxco/itservice.git
+        version: master
+        dest: /opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice
+        accept_hostkey: yes
+
+    - name: Applying Terraform Plan
+      shell: |
+        git-crypt unlock ~/.fos-gridvcenter01/terraform-vsphere.pem
+        terraform init -var-file=~/.fos-gridvcenter01/terraform.tfvars
+        terraform plan -var-file=~/.fos-gridvcenter01/terraform.tfvars
+      register: command_result
+      args:
+        chdir: "/opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice/terraform-vsphere/fos-gridvcenter01/lib"
+
+    - debug: msg="{{ command_result.stdout }}"
