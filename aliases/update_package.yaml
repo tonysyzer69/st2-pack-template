@@ -9,7 +9,7 @@ formats:
       - "upgrade {{ package }}  {{ hosts }}"
 result:
   format: |
-    Update `{{ execution.parameters.package }}` `{{ execution.parameters.hosts }}` {~}
+    update `{{ execution.parameters.package }}` `{{ execution.parameters.hosts }}` {~}
     {% if execution.result.stderr %}
     *Exit Status*: `{{ execution.result.return_code }}`
     *Stderr:* ```{{ execution.result.stderr }}```
