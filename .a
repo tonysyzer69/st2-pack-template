@@ -1,4 +1,4 @@
-alias v='vi actions/terraform_fos_gridvcenter01.yaml'
-alias vv='vi aliases/terraform_fos_gridvcenter01.yaml'
+alias v='vi actions/terraform.yaml'
+alias vv='vi aliases/terraform.yaml'
 alias r='git commit -a;git push'
 alias s='git status'

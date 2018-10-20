@@ -1,5 +1,5 @@
 ---
-name: playbook_terraform
+name: terraform
 description: run terraform
 runner_type: local-shell-cmd
 entry_point: ""
@@ -15,7 +15,7 @@ parameters:
   cmd:
     description: "Command to run"
     immutable: true
-    default: "/opt/stackstorm/virtualenvs/ansible/bin/ansible-playbook /opt/stackstorm/packs/${ST2_ACTION_PACK_NAME}/playbooks/playbook_terraform.yaml --extra-vars='command={{command}} vcenter={{vcenter}}' --tags {{vcenter}}"
+    default: "/opt/stackstorm/virtualenvs/ansible/bin/ansible-playbook /opt/stackstorm/packs/${ST2_ACTION_PACK_NAME}/playbooks/playbook_fos_gridvcenter01.yml --extra-vars='vcenter={{vcenter|replace('http://','')}} command={{command}}'"
   vcenter:
     description: "Vsphere vcenter"
     type: string
