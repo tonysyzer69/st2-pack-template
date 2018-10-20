@@ -1,0 +1,11 @@
+---
+name: chatops.ansible_terraform
+action_ref: st2_chatops_aliases.terraform
+description: run terraform
+formats:
+  - display: "terraform <command> <vcenter>"
+    representation:
+      - "terraform {{ command }} {{ vcenter }}"
+result:
+  format: |
+    terraform `{{ execution.parameters.command }}` `{{ execution.parameters.vcenter }}`
