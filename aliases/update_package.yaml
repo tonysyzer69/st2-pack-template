@@ -5,8 +5,7 @@ description: Update package remote hosts
 formats:
   - display: "update <package> <hosts>"
     representation:
-      - "update {{ package }}  {{ hosts }}"
-      - "upgrade {{ package }}  {{ hosts }}"
+      - "update {{ package }} {{ hosts }}"
 result:
   format: |
     update `{{ execution.parameters.package }}` `{{ execution.parameters.hosts }}` {~}
