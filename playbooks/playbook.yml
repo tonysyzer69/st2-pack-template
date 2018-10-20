@@ -1,26 +1,19 @@
 ---
-- hosts: all
-  gather_facts: no
-  connection: local
-  roles:
-    - haproxy
-
+- name: Update package on remote hosts, run on 25% of servers at a time
+  hosts: "{{ hosts }}"
+  serial: "25%"
+  become: True
+  become_user: root
   tasks:
+    - name: Check if Package is installed
+      command: dpkg-query -l {{ package }}
+      register: is_installed
+      failed_when: is_installed.rc > 1
+      changed_when: no
 
-    - name: Clone a private repository into /opt.
-      git:
-        repo: git@git.zooxlabs.com:zooxco/itservice.git
-        version: master
-        dest: /opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice
-        accept_hostkey: yes
-
-    - name: Applying Terraform Plan
-      shell: |
-        git-crypt unlock ~/.fos-gridvcenter01/terraform-vsphere.pem
-        terraform init -var-file=~/.fos-gridvcenter01/terraform.tfvars
-        terraform plan -var-file=~/.fos-gridvcenter01/terraform.tfvars
-      register: command_result
-      args:
-        chdir: "/opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice/terraform-vsphere/fos-gridvcenter01/lib"
-
-    - debug: msg="{{ command_result.stdout }}"
+    - name: Update Package only if installed
+      apt: name={{ package }}
+        state=latest
+        update_cache=yes
+        cache_valid_time=600
+      when: is_installed.rc == 0

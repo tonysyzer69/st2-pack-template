@@ -1,3 +1,4 @@
 alias v='vi actions/terraform.yaml'
 alias vv='vi aliases/terraform.yaml'
 alias r='git commit -a;git push'
+alias s='git status'
