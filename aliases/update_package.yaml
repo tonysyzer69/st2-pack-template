@@ -1,5 +1,5 @@
 ---
-name: chatops.ansible_package_update
+name: chatops.ansible_update_package
 action_ref: st2_chatops_aliases.update_package
 description: Update package remote hosts
 formats:
