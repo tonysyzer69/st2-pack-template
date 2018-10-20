@@ -11,12 +11,31 @@
         dest: /opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice
         accept_hostkey: yes
       tags:
+        - git-clone
+
+    - name: pull from git
+      git:
+        repo: git@git.zooxlabs.com:zooxco/itservice.git
+        dest: /opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice
+        update: yes
+        version: master
+      tags:
+        - git-pull
         - fos-gridvcenter01
         - fos-vcenter01
 
+    - name: unlock state file
+      shell: |
+        git-crypt unlock ~/.keys/terraform-vsphere.pem
+      register: command_result
+      args:
+        chdir: "/opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice/terraform-vsphere"
+      tags:
+        - git-clone
+
+
     - name: Running Terraform fos-gridvcenter01
       shell: |
-        git-crypt unlock ~/.fos-gridvcenter01/terraform-vsphere.pem
         terraform init -var-file=~/.fos-gridvcenter01/terraform.tfvars
         terraform {{ package }} -var-file=~/.fos-gridvcenter01/terraform.tfvars
       register: command_result
@@ -31,7 +50,6 @@
 
     - name: Running Terraform fos-vcenter01
       shell: |
-        git-crypt unlock ~/.fos-vcenter01/terraform-vsphere.pem
         terraform init -var-file=~/.fos-vcenter01/terraform.tfvars
         terraform {{ package }} -var-file=~/.fos-vcenter01/terraform.tfvars
       register: command_result
