@@ -1,6 +1,6 @@
 ---
-name: terraform_fos_gridvcenter01
-description: terraform_fos_gridvcenter01
+name: playbook_fos_gridvcenter01
+description: run terraform
 runner_type: local-shell-cmd
 entry_point: ""
 enabled: true
@@ -15,8 +15,12 @@ parameters:
   cmd:
     description: "Command to run"
     immutable: true
-    default: "/opt/stackstorm/virtualenvs/ansible/bin/ansible-playbook /opt/stackstorm/packs/${ST2_ACTION_PACK_NAME}/playbooks/playbook_fos_gridvcenter01.yml"
-  input1:
-    description: "input1"
+    default: "/opt/stackstorm/virtualenvs/ansible/bin/ansible-playbook /opt/stackstorm/packs/${ST2_ACTION_PACK_NAME}/playbooks/playbook_fos_gridvcenter01.yaml"
+  hosts:
+    description: "Ansible hosts"
+    type: string
+    required: true
+  package:
+    description: "Package to upgrade"
     type: string
     required: true
