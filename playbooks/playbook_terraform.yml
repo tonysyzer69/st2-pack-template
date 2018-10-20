@@ -37,7 +37,7 @@
     - name: Running Terraform fos-gridvcenter01
       shell: |
         terraform init -var-file=~/.fos-gridvcenter01/terraform.tfvars
-        terraform {{ package }} -var-file=~/.fos-gridvcenter01/terraform.tfvars
+        terraform {{ command }} -var-file=~/.fos-gridvcenter01/terraform.tfvars
       register: command_result
       args:
         chdir: "/opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice/terraform-vsphere/fos-gridvcenter01/lib"
@@ -51,7 +51,7 @@
     - name: Running Terraform fos-vcenter01
       shell: |
         terraform init -var-file=~/.fos-vcenter01/terraform.tfvars
-        terraform {{ package }} -var-file=~/.fos-vcenter01/terraform.tfvars
+        terraform {{ command }} -var-file=~/.fos-vcenter01/terraform.tfvars
       register: command_result
       args:
         chdir: "/opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice/terraform-vsphere/fos-vcenter01/lib"
