@@ -15,7 +15,7 @@ parameters:
   cmd:
     description: "Command to run"
     immutable: true
-    default: "/opt/stackstorm/virtualenvs/ansible/bin/ansible-playbook /opt/stackstorm/packs/${ST2_ACTION_PACK_NAME}/playbooks/playbook_fos_gridvcenter01.yaml --extra-vars='package={{package}} hosts={{hosts}}' --tags \"{{hosts}}\""
+    default: "/opt/stackstorm/virtualenvs/ansible/bin/ansible-playbook /opt/stackstorm/packs/${ST2_ACTION_PACK_NAME}/playbooks/playbook_fos_gridvcenter01.yaml --extra-vars='package={{package}} hosts={{hosts}}' --tags {{hosts}}"
   hosts:
     description: "Ansible hosts"
     type: string
