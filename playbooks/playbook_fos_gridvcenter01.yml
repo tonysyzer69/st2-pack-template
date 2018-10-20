@@ -10,6 +10,9 @@
         version: master
         dest: /opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice
         accept_hostkey: yes
+      tags:
+        - fos-gridvcenter01
+        - fos-vcenter01
 
     - name: Running Terraform fos-gridvcenter01
       shell: |
