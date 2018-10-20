@@ -8,7 +8,7 @@
       git:
         repo: git@git.zooxlabs.com:zooxco/itservice.git
         version: master
-        dest: /opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice
+        dest: ~/git/itservice
         accept_hostkey: yes
       tags:
         - git-clone
@@ -16,7 +16,7 @@
     - name: pull from git
       git:
         repo: git@git.zooxlabs.com:zooxco/itservice.git
-        dest: /opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice
+        dest: ~/git/itservice
         update: yes
         version: master
       tags:
@@ -29,7 +29,7 @@
         git-crypt unlock ~/.keys/terraform-vsphere.pem
       register: command_result
       args:
-        chdir: "/opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice/terraform-vsphere"
+        chdir: "~/git/itservice/terraform-vsphere"
       tags:
         - git-clone
 
@@ -37,10 +37,10 @@
     - name: Running Terraform fos-gridvcenter01
       shell: |
         terraform init -var-file=~/.fos-gridvcenter01/terraform.tfvars
-        terraform {{ command }} -var-file=~/.fos-gridvcenter01/terraform.tfvars
+        terraform {{command}} -var-file=~/.fos-gridvcenter01/terraform.tfvars
       register: command_result
       args:
-        chdir: "/opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice/terraform-vsphere/fos-gridvcenter01/lib"
+        chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01/lib"
       tags:
         - fos-gridvcenter01
 
@@ -51,10 +51,10 @@
     - name: Running Terraform fos-vcenter01
       shell: |
         terraform init -var-file=~/.fos-vcenter01/terraform.tfvars
-        terraform {{ command }} -var-file=~/.fos-vcenter01/terraform.tfvars
+        terraform {{command}} -var-file=~/.fos-vcenter01/terraform.tfvars
       register: command_result
       args:
-        chdir: "/opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice/terraform-vsphere/fos-vcenter01/lib"
+        chdir: "~/git/itservice/terraform-vsphere/fos-vcenter01/lib"
       tags:
         - fos-vcenter01
 
