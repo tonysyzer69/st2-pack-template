@@ -1,6 +1,6 @@
 ---
 name: update_package
-description: Update package on remote hosts
+description: Update package remote hosts
 runner_type: local-shell-cmd
 entry_point: ""
 enabled: true
