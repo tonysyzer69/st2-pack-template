@@ -35,10 +35,10 @@
 
 
     - name: Running Terraform fos-gridvcenter01
-      when: command == "plan"
+      when: commandoption == "plan"
       shell: |
         terraform init -var-file=~/.fos-gridvcenter01/terraform.tfvars
-        terraform {{command}} -var-file=~/.fos-gridvcenter01/terraform.tfvars
+        terraform {{commandoption}} -var-file=~/.fos-gridvcenter01/terraform.tfvars
       register: command_result
       args:
         chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01/lib"
@@ -46,10 +46,10 @@
         - fos-gridvcenter01
 
     - name: Running Terraform fos-gridvcenter01
-      when: command == "apply"
+      when: commandoption == "apply"
       shell: |
         terraform init -var-file=~/.fos-gridvcenter01/terraform.tfvars
-        terraform {{command}} -var-file=~/.fos-gridvcenter01/terraform.tfvars -auto-approve 
+        terraform {{commandoption}} -var-file=~/.fos-gridvcenter01/terraform.tfvars -auto-approve 
       register: command_result
       args:
         chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01/lib"
@@ -63,7 +63,7 @@
     - name: Running Terraform fos-vcenter01
       shell: |
         terraform init -var-file=~/.fos-vcenter01/terraform.tfvars
-        terraform {{command}} -var-file=~/.fos-vcenter01/terraform.tfvars
+        terraform {{commandoption}} -var-file=~/.fos-vcenter01/terraform.tfvars
       register: command_result
       args:
         chdir: "~/git/itservice/terraform-vsphere/fos-vcenter01/lib"
