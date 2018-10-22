@@ -44,5 +44,5 @@
       when: commandoption == "plan"
 
     - debug: msg="{{ command_result.stdout }}"
-      when: commandoption == "plan"
+      when: commandoption == "plan" and vcenter == "fos-gridvcenter01"
 
