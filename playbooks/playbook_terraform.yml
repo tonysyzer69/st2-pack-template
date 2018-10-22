@@ -34,8 +34,7 @@
         - git-clone
 
 
-    - name: Running Terraform fos-gridvcenter01
-      when: commandoption == "plan"
+    - name: Running Terraform plan fos-gridvcenter01
       shell: |
         terraform init -var-file=~/.fos-gridvcenter01/terraform.tfvars
         terraform {{commandoption}} -var-file=~/.fos-gridvcenter01/terraform.tfvars
@@ -44,8 +43,9 @@
         chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01/lib"
       tags:
         - fos-gridvcenter01
+      when: commandoption == "plan"
 
-    - name: Running Terraform fos-gridvcenter01
+    - name: Running Terraform apply fos-gridvcenter01
       when: commandoption == "apply"
       shell: |
         terraform init -var-file=~/.fos-gridvcenter01/terraform.tfvars
