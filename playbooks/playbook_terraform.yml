@@ -41,35 +41,8 @@
       register: command_result
       args:
         chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01/lib"
-      tags:
-        - fos-gridvcenter01
       when: commandoption == "plan"
 
-    - name: Running Terraform apply fos-gridvcenter01
-      when: commandoption == "apply"
-      shell: |
-        terraform init -var-file=~/.fos-gridvcenter01/terraform.tfvars
-        terraform {{commandoption}} -var-file=~/.fos-gridvcenter01/terraform.tfvars
-      register: command_result
-      args:
-        chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01/lib"
-      tags:
-        - fos-gridvcenter01
-
     - debug: msg="{{ command_result.stdout }}"
-      tags:
-        - fos-gridvcenter01
+      when: commandoption == "plan"
 
-    - name: Running Terraform fos-vcenter01
-      shell: |
-        terraform init -var-file=~/.fos-vcenter01/terraform.tfvars
-        terraform {{commandoption}} -var-file=~/.fos-vcenter01/terraform.tfvars
-      register: command_result
-      args:
-        chdir: "~/git/itservice/terraform-vsphere/fos-vcenter01/lib"
-      tags:
-        - fos-vcenter01
-
-    - debug: msg="{{ command_result.stdout }}"
-      tags:
-        - fos-vcenter01
