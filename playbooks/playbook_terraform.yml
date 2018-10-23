@@ -27,7 +27,7 @@
     - name: unlock state file
       shell: |
         git-crypt unlock ~/.keys/terraform-vsphere.pem
-      register: command_result
+      register: output_result
       args:
         chdir: "~/git/itservice/terraform-vsphere"
       tags:
@@ -38,25 +38,25 @@
       shell: |
         terraform init -var-file=~/.fos-gridvcenter01/terraform.tfvars
         terraform plan -var-file=~/.fos-gridvcenter01/terraform.tfvars
-      register: command_result
+      register: output_result
       args:
         chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01/lib"
       tags:
         - fos-gridvcenter01
-      when: command == "plan"
+      when: commandoption == "plan"
 
     - name: Running Terraform apply fos-gridvcenter01
       shell: |
         terraform init -var-file=~/.fos-gridvcenter01/terraform.tfvars
         terraform apply -var-file=~/.fos-gridvcenter01/terraform.tfvars -auto-approve
-      register: command_result
+      register: output_result
       args:
         chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01/lib"
       tags:
         - fos-gridvcenter01
-      when: command == "apply"
+      when: commandoption == "apply"
 
-    - debug: msg="{{ command_result.stdout }}"
+    - debug: msg="{{ output_result.stdout }}"
       tags:
         - fos-gridvcenter01
 
@@ -64,24 +64,24 @@
       shell: |
         terraform init -var-file=~/.fos-vcenter01/terraform.tfvars
         terraform plan -var-file=~/.fos-vcenter01/terraform.tfvars
-      register: command_result
+      register: output_result
       args:
         chdir: "~/git/itservice/terraform-vsphere/fos-vcenter01/lib"
       tags:
         - fos-vcenter01
-      when: command == "plan"
+      when: commandoption == "plan"
 
     - name: Running Terraform apply fos-vcenter01
       shell: |
         terraform init -var-file=~/.fos-vcenter01/terraform.tfvars
         terraform apply -var-file=~/.fos-vcenter01/terraform.tfvars -auto-approve
-      register: command_result
+      register: output_result
       args:
         chdir: "~/git/itservice/terraform-vsphere/fos-vcenter01/lib"
       tags:
         - fos-vcenter01
-      when: command == "apply"
+      when: commandoption == "apply"
 
-    - debug: msg="{{ command_result.stdout }}"
+    - debug: msg="{{ output_result.stdout }}"
       tags:
         - fos-vcenter01
