@@ -15,12 +15,12 @@ parameters:
   cmd:
     description: "Command to run"
     immutable: true
-    default: "/opt/stackstorm/virtualenvs/ansible/bin/ansible-playbook /opt/stackstorm/packs/${ST2_ACTION_PACK_NAME}/playbooks/playbook_terraform.yml --extra-vars='vcenter={{vcenter}} command={{command}}' --tags {{vcenter}}"
+    default: "/opt/stackstorm/virtualenvs/ansible/bin/ansible-playbook /opt/stackstorm/packs/${ST2_ACTION_PACK_NAME}/playbooks/playbook_terraform.yml --extra-vars='vcenter={{vcenter}} commandoption={{commandoption}}'"
   vcenter:
     description: "Vsphere vcenter"
     type: string
     required: true
-  command:
+  commandoption:
     description: "plan or apply"
     type: string
     required: true

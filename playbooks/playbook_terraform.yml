@@ -37,6 +37,7 @@
     - name: Running Terraform plan fos-gridvcenter01
       shell: |
         terraform init -var-file=~/.fos-gridvcenter01/terraform.tfvars
+<<<<<<< HEAD
         terraform plan -var-file=~/.fos-gridvcenter01/terraform.tfvars
       register: command_result
       args:
@@ -55,22 +56,31 @@
       tags:
         - fos-gridvcenter01
       when: command == "apply"
+=======
+        terraform {{commandoption}} -var-file=~/.fos-gridvcenter01/terraform.tfvars
+      register: command_result
+      args:
+        chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01/lib"
+      when: commandoption == "plan"
+>>>>>>> a5bbaa7fd42db1ae8220355974f92b75f427c0c4
 
     - debug: msg="{{ command_result.stdout }}"
-      tags:
-        - fos-gridvcenter01
+      when: commandoption == "plan" and vcenter == "fos-gridvcenter01"
 
     - name: Running Terraform plan fos-vcenter01
       shell: |
         terraform init -var-file=~/.fos-vcenter01/terraform.tfvars
-        terraform {{command}} -var-file=~/.fos-vcenter01/terraform.tfvars
+        terraform {{commandoption}} -var-file=~/.fos-vcenter01/terraform.tfvars
       register: command_result
       args:
         chdir: "~/git/itservice/terraform-vsphere/fos-vcenter01/lib"
-      tags:
-        - fos-vcenter01
+      when: commandoption == "plan"
 
     - debug: msg="{{ command_result.stdout }}"
+<<<<<<< HEAD
       tags:
         - fos-vcenter01
       when: command == "plan"
+=======
+      when: commandoption == "plan" and vcenter == "fos-vcenter01"
+>>>>>>> a5bbaa7fd42db1ae8220355974f92b75f427c0c4
