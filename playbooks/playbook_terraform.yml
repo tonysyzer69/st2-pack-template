@@ -10,15 +10,25 @@
         version: master
         dest: ~/git/itservice
         accept_hostkey: yes
+      register: output_plan_git_clone
       tags:
         - git-clone
 
-    - name: pull from git
-      git:
-        repo: git@git.zooxlabs.com:zooxco/itservice.git
-        dest: ~/git/itservice
-        update: yes
-        version: master
+    - debug: msg="{{ output_plan_git_clone.stdout }}"
+      tags:
+        - git-clone
+
+    - name: git pull master
+      command: git pull
+      register: output_plan_git_pull
+      args:
+        chdir: "~/git/itservice"
+      tags:
+        - git-pull
+        - fos-gridvcenter01
+        - fos-vcenter01
+
+    - debug: msg="{{ output_plan_git_pull.stdout }}"
       tags:
         - git-pull
         - fos-gridvcenter01
