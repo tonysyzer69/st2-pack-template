@@ -46,3 +46,14 @@
     - debug: msg="{{ command_result.stdout }}"
       when: commandoption == "plan" and vcenter == "fos-gridvcenter01"
 
+    - name: Running Terraform plan fos-vcenter01
+      shell: |
+        terraform init -var-file=~/.fos-vcenter01/terraform.tfvars
+        terraform {{commandoption}} -var-file=~/.fos-vcenter01/terraform.tfvars
+      register: command_result
+      args:
+        chdir: "~/git/itservice/terraform-vsphere/fos-vcenter01/lib"
+      when: commandoption == "plan"
+
+    - debug: msg="{{ command_result.stdout }}"
+      when: commandoption == "plan" and vcenter == "fos-vcenter01"
