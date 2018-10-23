@@ -86,7 +86,7 @@
         - terraform-init-sun-vcenter01
 
     - name: run generate_vm.sh fos-gridvcenter01
-      command: ~/git/itservice/terraform-vsphere/script/generate_vm.sh
+      command: ~/git/itservice/terraform-vsphere/script/generate_vm.sh skip-postinstall
       register: output_generate_vm_fos_gridvcenter01
       args:
         chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01"
