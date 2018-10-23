@@ -75,7 +75,6 @@
     - name: Running Terraform plan fos-gridvcenter01
       shell: |
         terraform init -var-file=~/.fos-gridvcenter01/terraform.tfvars
-        ~/git/itservice/terraform-vsphere/script/generate_vm.sh
         terraform plan -var-file=~/.fos-gridvcenter01/terraform.tfvars
       register: output_plan_fos_gridvcenter01
       args:
