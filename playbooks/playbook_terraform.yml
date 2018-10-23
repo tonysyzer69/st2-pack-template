@@ -27,9 +27,13 @@
     - name: unlock state file
       shell: |
         git-crypt unlock ~/.keys/terraform-vsphere.pem
-      register: output_result
+      register: output_unlock
       args:
         chdir: "~/git/itservice/terraform-vsphere"
+      tags:
+        - git-clone
+
+    - debug: msg="{{ output_unlock.stdout }}"
       tags:
         - git-clone
 
@@ -38,9 +42,14 @@
       shell: |
         terraform init -var-file=~/.fos-gridvcenter01/terraform.tfvars
         terraform plan -var-file=~/.fos-gridvcenter01/terraform.tfvars
-      register: output_result
+      register: output_plan_fos_gridvcenter01
       args:
         chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01/lib"
+      tags:
+        - fos-gridvcenter01
+      when: commandoption == "plan"
+
+    - debug: msg="{{ output_plan_fos_gridvcenter01.stdout }}"
       tags:
         - fos-gridvcenter01
       when: commandoption == "plan"
@@ -49,39 +58,47 @@
       shell: |
         terraform init -var-file=~/.fos-gridvcenter01/terraform.tfvars
         terraform apply -var-file=~/.fos-gridvcenter01/terraform.tfvars -auto-approve
-      register: output_result
+      register: output_apply_fos_gridvcenter01
       args:
         chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01/lib"
       tags:
         - fos-gridvcenter01
       when: commandoption == "apply"
 
-    - debug: msg="{{ output_result.stdout }}"
+    - debug: msg="{{ output_apply_fos_gridvcenter01.stdout }}"
       tags:
         - fos-gridvcenter01
+      when: commandoption == "apply"
 
     - name: Running Terraform plan fos-vcenter01
       shell: |
         terraform init -var-file=~/.fos-vcenter01/terraform.tfvars
         terraform plan -var-file=~/.fos-vcenter01/terraform.tfvars
-      register: output_result
+      register: output_plan_fos_vcenter01
       args:
         chdir: "~/git/itservice/terraform-vsphere/fos-vcenter01/lib"
       tags:
         - fos-vcenter01
       when: commandoption == "plan"
 
+    - debug: msg="{{ output_plan_fos_vcenter01.stdout }}"
+      tags:
+        - fos-vcenter01
+      when: commandoption == "plan"
+
+
     - name: Running Terraform apply fos-vcenter01
       shell: |
         terraform init -var-file=~/.fos-vcenter01/terraform.tfvars
         terraform apply -var-file=~/.fos-vcenter01/terraform.tfvars -auto-approve
-      register: output_result
+      register: output_apply_fos_vcenter01
       args:
         chdir: "~/git/itservice/terraform-vsphere/fos-vcenter01/lib"
       tags:
         - fos-vcenter01
       when: commandoption == "apply"
 
-    - debug: msg="{{ output_result.stdout }}"
+    - debug: msg="{{ output_apply_fos_vcenter01.stdout }}"
       tags:
         - fos-vcenter01
+      when: commandoption == "apply"
