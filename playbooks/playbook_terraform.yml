@@ -47,6 +47,30 @@
       tags:
         - git-clone
 
+    - name: run generate_vm.sh fos-gridvcenter01
+      command: ~/git/itservice/terraform-vsphere/script/generate_vm.sh
+      register: output_generate_vm_fos_gridvcenter01
+      args:
+        chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01"
+      tags:
+        - fos-gridvcenter01
+
+    - debug: msg="{{ output_generate_vm_fos_gridvcenter01.stdout }}"
+      tags:
+        - fos-gridvcenter01
+
+    - name: run generate_vm.sh fos-vcenter01
+      command: ~/git/itservice/terraform-vsphere/script/generate_vm.sh
+      register: output_generate_vm_fos_vcenter01
+      args:
+        chdir: "~/git/itservice/terraform-vsphere/fos-vcenter01"
+      tags:
+        - fos-vcenter01
+
+    - debug: msg="{{ output_generate_vm_fos_vcenter01.stdout }}"
+      tags:
+        - fos-vcenter01
+
 
     - name: Running Terraform plan fos-gridvcenter01
       shell: |
