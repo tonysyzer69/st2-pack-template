@@ -124,7 +124,9 @@
 
     - name: Running Terraform plan fos-gridvcenter01
       shell: |
+	/opt/stackstorm/virtualenvs/ansible/bin/ansible-vault decrypt --vault-password-file=~/.vault-passwd ~/.fos-gridvcenter01/terraform.tfvars
         terraform plan -var-file=~/.fos-gridvcenter01/terraform.tfvars|landscape
+	/opt/stackstorm/virtualenvs/ansible/bin/ansible-vault encrypt --vault-password-file=~/.vault-passwd ~/.fos-gridvcenter01/terraform.tfvars
       register: output_plan_fos_gridvcenter01
       args:
         chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01/lib"
@@ -139,7 +141,9 @@
 
     - name: Running Terraform apply fos-gridvcenter01
       shell: |
+	/opt/stackstorm/virtualenvs/ansible/bin/ansible-vault decrypt --vault-password-file=~/.vault-passwd ~/.fos-gridvcenter01/terraform.tfvars
         terraform apply -var-file=~/.fos-gridvcenter01/terraform.tfvars -auto-approve|landscape
+	/opt/stackstorm/virtualenvs/ansible/bin/ansible-vault encrypt --vault-password-file=~/.vault-passwd ~/.fos-gridvcenter01/terraform.tfvars
       register: output_apply_fos_gridvcenter01
       args:
         chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01/lib"
@@ -154,7 +158,9 @@
 
     - name: Running Terraform plan fos-vcenter01
       shell: |
+	/opt/stackstorm/virtualenvs/ansible/bin/ansible-vault decrypt --vault-password-file=~/.vault-passwd ~/.fos-vcenter01/terraform.tfvars
         terraform plan -var-file=~/.fos-vcenter01/terraform.tfvars|landscape
+	/opt/stackstorm/virtualenvs/ansible/bin/ansible-vault encrypt --vault-password-file=~/.vault-passwd ~/.fos-vcenter01/terraform.tfvars
       register: output_plan_fos_vcenter01
       args:
         chdir: "~/git/itservice/terraform-vsphere/fos-vcenter01/lib"
@@ -170,7 +176,9 @@
 
     - name: Running Terraform apply fos-vcenter01
       shell: |
+	/opt/stackstorm/virtualenvs/ansible/bin/ansible-vault decrypt --vault-password-file=~/.vault-passwd ~/.fos-vcenter01/terraform.tfvars
         terraform apply -var-file=~/.fos-vcenter01/terraform.tfvars -auto-approve|landscape
+	/opt/stackstorm/virtualenvs/ansible/bin/ansible-vault encrypt --vault-password-file=~/.vault-passwd ~/.fos-vcenter01/terraform.tfvars
       register: output_apply_fos_vcenter01
       args:
         chdir: "~/git/itservice/terraform-vsphere/fos-vcenter01/lib"
@@ -185,7 +193,9 @@
 
     - name: Running Terraform plan sun-vcenter01
       shell: |
+	/opt/stackstorm/virtualenvs/ansible/bin/ansible-vault decrypt --vault-password-file=~/.vault-passwd ~/.sun-vcenter01/terraform.tfvars
         terraform plan -var-file=~/.sun-vcenter01/terraform.tfvars|landscape
+	/opt/stackstorm/virtualenvs/ansible/bin/ansible-vault encrypt --vault-password-file=~/.vault-passwd ~/.sun-vcenter01/terraform.tfvars
       register: output_plan_sun_vcenter01
       args:
         chdir: "~/git/itservice/terraform-vsphere/sun-vcenter01/lib"
@@ -201,7 +211,9 @@
 
     - name: Running Terraform apply sun-vcenter01
       shell: |
+	/opt/stackstorm/virtualenvs/ansible/bin/ansible-vault decrypt --vault-password-file=~/.vault-passwd ~/.sun-vcenter01/terraform.tfvars
         terraform apply -var-file=~/.sun-vcenter01/terraform.tfvars -auto-approve|landscape
+	/opt/stackstorm/virtualenvs/ansible/bin/ansible-vault encrypt --vault-password-file=~/.vault-passwd ~/.sun-vcenter01/terraform.tfvars
       register: output_apply_sun_vcenter01
       args:
         chdir: "~/git/itservice/terraform-vsphere/sun-vcenter01/lib"
