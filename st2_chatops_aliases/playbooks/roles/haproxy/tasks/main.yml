@@ -1,0 +1,20 @@
+---
+- block:
+  - name: update apt
+    apt: update_cache=yes cache_valid_time=3600
+    #become: yes
+    #become_user: root
+
+  - name: install haproxy
+    apt: name=haproxy state=present
+    #become: yes
+    #become_user: root
+
+  - name: Update HAProxy config
+    template: src=templates/haproxy.cfg 
+      dest=/etc/haproxy/haproxy.cfg 
+      backup=yes
+    notify:
+      - restart haproxy
+  become: yes
+  become_user: root
