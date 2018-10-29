@@ -15,4 +15,3 @@
 ## Actions
 
 [Description of all the available actions]
-add testbot1
