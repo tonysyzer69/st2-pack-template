@@ -7,7 +7,6 @@
     - name: Running Terraform plan fos-gridvcenter01
       shell: |
         echo "user1"
-        echo  {{st2_auth_username}}
       register: output_plan_fos_gridvcenter01
       args:
         chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01/lib"
