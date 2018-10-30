@@ -24,3 +24,7 @@ parameters:
     description: "plan or apply"
     type: string
     required: true
+  user1:
+    description: "user"
+    type: string
+    required: true
