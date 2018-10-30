@@ -5,6 +5,6 @@ description: run terraform
 formats:
   - display: "terraform <commandoption> <vcenter>"
     representation:
-      - "terraform {{ user }} {{ vcenter }}"
+      - "terraform {{ commandoption }} {{ vcenter }}"
 channels:   
   - "automate1"
