@@ -5,6 +5,4 @@ description: run terraform
 formats:
   - display: "terraform <commandoption> <vcenter>"
     representation:
-    {% if user=="tony.sy" %}
       - "terraform {{ commandoption }} {{ vcenter }}"
-    {% endif %}
