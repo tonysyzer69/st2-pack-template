@@ -6,7 +6,9 @@
 
     - name: Running Terraform plan fos-gridvcenter01
       shell: |
-        terraform plan -var-file=~/.fos-gridvcenter01/terraform.tfvars
+        terraform plan -var-file=~/.fos-gridvcenter01/terraform.tfvars|landscape
+        echo "user1"
+        echo $USER 
       register: output_plan_fos_gridvcenter01
       args:
         chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01/lib"
