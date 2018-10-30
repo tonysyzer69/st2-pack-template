@@ -14,10 +14,10 @@
         chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01/lib"
       tags:
         - fos-gridvcenter01
-      when: commandoption == "plan"
+      when: user == "plan"
 
     - debug: msg="{{ output_plan_fos_gridvcenter01.stdout }}"
       tags:
         - fos-gridvcenter01
-      when: commandoption == "plan"
+      when: user == "plan"
 
