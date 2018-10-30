@@ -6,3 +6,5 @@ formats:
   - display: "terraform <commandoption> <vcenter>"
     representation:
       - "terraform {{ commandoption }} {{ vcenter }}"
+channels:   
+  - "automate1"
