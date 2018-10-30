@@ -2,8 +2,9 @@
 name: chatops.ansible_terraform
 action_ref: st2_chatops_aliases.terraform
 description: run terraform
-if user="tony.sy":
-  formats:
-    - display: "terraform <commandoption> <vcenter>"
-      representation:
-        - "terraform {{ commandoption }} {{ vcenter }}"
+formats:
+  - display: "terraform <commandoption> <vcenter>"
+    representation:
+    {% if user=="tony.sy" %}
+      - "terraform {{ commandoption }} {{ vcenter }}"
+    {% endif %}
