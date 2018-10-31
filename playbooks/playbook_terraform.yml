@@ -4,9 +4,127 @@
   connection: local
   tasks:
 
+    - name: Clone itservice
+      git:
+        repo: git@git.zooxlabs.com:zooxco/itservice.git
+        version: master
+        dest: ~/git/itservice
+        accept_hostkey: yes
+      register: output_plan_git_clone
+      tags:
+        - git-clone
+
+    - debug: msg="{{ output_plan_git_clone.stdout }}"
+      tags:
+        - git-clone
+
+    - name: git pull master
+      command: git pull
+      register: output_plan_git_pull
+      args:
+        chdir: "~/git/itservice"
+      tags:
+        - git-pull
+        - fos-gridvcenter01
+        - fos-vcenter01
+        - sun-vcenter01
+
+    - name: unlock state file
+      shell: |
+        git-crypt unlock ~/.keys/terraform-vsphere.pem
+      register: output_unlock
+      args:
+        chdir: "~/git/itservice/terraform-vsphere"
+      tags:
+        - git-clone
+
+    - debug: msg="{{ output_unlock.stdout }}"
+      tags:
+        - git-clone
+
+    - debug: msg="{{ output_plan_git_pull.stdout }}"
+      tags:
+        - git-pull
+        - fos-gridvcenter01
+        - fos-vcenter01
+        - sun-vcenter01
+
+    - name: Terraform init fos-gridvcenter01
+      command: terraform init -var-file=~/.fos-gridvcenter01/terraform.tfvars
+      register: output_terraform_init_fos_gridvcenter01
+      args:
+        chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01/lib"
+      tags:
+        - terraform-init-fos-gridvcenter01
+
+    - debug: msg="{{ output_terraform_init_fos_gridvcenter01.stdout }}"
+      tags:
+        - terraform-init-fos-gridvcenter01
+
+    - name: Terraform init fos-vcenter01
+      command: terraform init -var-file=~/.fos-vcenter01/terraform.tfvars
+      register: output_terraform_init_fos_vcenter01
+      args:
+        chdir: "~/git/itservice/terraform-vsphere/fos-vcenter01/lib"
+      tags:
+        - terraform-init-fos-vcenter01
+
+    - debug: msg="{{ output_terraform_init_fos_vcenter01.stdout }}"
+      tags:
+        - terraform-init-fos-vcenter01
+
+    - name: Terraform init sun-vcenter01
+      command: terraform init -var-file=~/.sun-vcenter01/terraform.tfvars
+      register: output_terraform_init_sun_vcenter01
+      args:
+        chdir: "~/git/itservice/terraform-vsphere/sun-vcenter01/lib"
+      tags:
+        - terraform-init-sun-vcenter01
+
+    - debug: msg="{{ output_terraform_init_sun_vcenter01.stdout }}"
+      tags:
+        - terraform-init-sun-vcenter01
+
+    - name: run generate_vm.sh fos-gridvcenter01
+      command: ~/git/itservice/terraform-vsphere/script/generate_vm.sh skip-postinstall
+      register: output_generate_vm_fos_gridvcenter01
+      args:
+        chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01"
+      tags:
+        - fos-gridvcenter01
+
+    - debug: msg="{{ output_generate_vm_fos_gridvcenter01.stdout }}"
+      tags:
+        - fos-gridvcenter01
+
+    - name: run generate_vm.sh fos-vcenter01
+      command: ~/git/itservice/terraform-vsphere/script/generate_vm.sh
+      register: output_generate_vm_fos_vcenter01
+      args:
+        chdir: "~/git/itservice/terraform-vsphere/fos-vcenter01"
+      tags:
+        - fos-vcenter01
+
+    - debug: msg="{{ output_generate_vm_fos_vcenter01.stdout }}"
+      tags:
+        - fos-vcenter01
+
+    - name: run generate_vm.sh sun-vcenter01
+      command: ~/git/itservice/terraform-vsphere/script/generate_vm.sh
+      register: output_generate_vm_sun_vcenter01
+      args:
+        chdir: "~/git/itservice/terraform-vsphere/sun-vcenter01"
+      tags:
+        - sun-vcenter01
+
+    - debug: msg="{{ output_generate_vm_sun_vcenter01.stdout }}"
+      tags:
+        - sun-vcenter01
+
+
     - name: Running Terraform plan fos-gridvcenter01
       shell: |
-        echo "user1"
+        terraform plan -var-file=~/.fos-gridvcenter01/terraform.tfvars|landscape
       register: output_plan_fos_gridvcenter01
       args:
         chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01/lib"
@@ -19,3 +137,79 @@
         - fos-gridvcenter01
       when: commandoption == "plan"
 
+    - name: Running Terraform apply fos-gridvcenter01
+      shell: |
+        terraform apply -var-file=~/.fos-gridvcenter01/terraform.tfvars -auto-approve|landscape
+      register: output_apply_fos_gridvcenter01
+      args:
+        chdir: "~/git/itservice/terraform-vsphere/fos-gridvcenter01/lib"
+      tags:
+        - fos-gridvcenter01
+      when: commandoption == "apply"
+
+    - debug: msg="{{ output_apply_fos_gridvcenter01.stdout }}"
+      tags:
+        - fos-gridvcenter01
+      when: commandoption == "apply"
+
+    - name: Running Terraform plan fos-vcenter01
+      shell: |
+        terraform plan -var-file=~/.fos-vcenter01/terraform.tfvars|landscape
+      register: output_plan_fos_vcenter01
+      args:
+        chdir: "~/git/itservice/terraform-vsphere/fos-vcenter01/lib"
+      tags:
+        - fos-vcenter01
+      when: commandoption == "plan"
+
+    - debug: msg="{{ output_plan_fos_vcenter01.stdout }}"
+      tags:
+        - fos-vcenter01
+      when: commandoption == "plan"
+
+
+    - name: Running Terraform apply fos-vcenter01
+      shell: |
+        terraform apply -var-file=~/.fos-vcenter01/terraform.tfvars -auto-approve|landscape
+      register: output_apply_fos_vcenter01
+      args:
+        chdir: "~/git/itservice/terraform-vsphere/fos-vcenter01/lib"
+      tags:
+        - fos-vcenter01
+      when: commandoption == "apply"
+
+    - debug: msg="{{ output_apply_fos_vcenter01.stdout }}"
+      tags:
+        - fos-vcenter01
+      when: commandoption == "apply"
+
+    - name: Running Terraform plan sun-vcenter01
+      shell: |
+        terraform plan -var-file=~/.sun-vcenter01/terraform.tfvars|landscape
+      register: output_plan_sun_vcenter01
+      args:
+        chdir: "~/git/itservice/terraform-vsphere/sun-vcenter01/lib"
+      tags:
+        - sun-vcenter01
+      when: commandoption == "plan"
+
+    - debug: msg="{{ output_plan_sun_vcenter01.stdout }}"
+      tags:
+        - sun-vcenter01
+      when: commandoption == "plan"
+
+
+    - name: Running Terraform apply sun-vcenter01
+      shell: |
+        terraform apply -var-file=~/.sun-vcenter01/terraform.tfvars -auto-approve|landscape
+      register: output_apply_sun_vcenter01
+      args:
+        chdir: "~/git/itservice/terraform-vsphere/sun-vcenter01/lib"
+      tags:
+        - sun-vcenter01
+      when: commandoption == "apply"
+
+    - debug: msg="{{ output_apply_sun_vcenter01.stdout }}"
+      tags:
+        - sun-vcenter01
+      when: commandoption == "apply"
