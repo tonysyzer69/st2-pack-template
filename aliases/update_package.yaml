@@ -1,14 +1,14 @@
 ---
-name: chatops.ansible_terraform
-action_ref: st2_chatops_aliases.terraform
-description: run terraform
+name: chatops.ansible_update_package
+action_ref: st2_chatops_aliases.update_package
+description: Update package remote hosts
 formats:
-  - display: "terraform <commandoption> <vcenter>"
+  - display: "update <package> <hosts>"
     representation:
-      - "terraform {{ commandoption }} {{ vcenter }}"
+      - "update {{ package }} {{ hosts }}"
 result:
   format: |
-    terraform `{{ execution.parameters.commandoption }}` `{{ execution.parameters.vcenter }}`
+    update `{{ execution.parameters.package }}` `{{ execution.parameters.hosts }}`
     {% if execution.result.stderr %}
     *Exit Status*: `{{ execution.result.return_code }}`
     *Stderr:* ```{{ execution.result.stderr }}```

@@ -1,0 +1,63 @@
+---
+- hosts: 127.0.0.1
+  gather_facts: no
+  connection: local
+  tasks:
+
+    - name: Clone itservice
+      git:
+        repo: git@git.zooxlabs.com:zooxco/itservice.git
+        version: master
+        dest: /opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice
+        accept_hostkey: yes
+      tags:
+        - git-clone
+
+    - name: pull from git
+      git:
+        repo: git@git.zooxlabs.com:zooxco/itservice.git
+        dest: /opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice
+        update: yes
+        version: master
+      tags:
+        - git-pull
+        - fos-gridvcenter01
+        - fos-vcenter01
+
+    - name: unlock state file
+      shell: |
+        git-crypt unlock ~/.keys/terraform-vsphere.pem
+      register: command_result
+      args:
+        chdir: "/opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice/terraform-vsphere"
+      tags:
+        - git-clone
+
+
+    - name: Running Terraform fos-gridvcenter01
+      shell: |
+        terraform init -var-file=~/.fos-gridvcenter01/terraform.tfvars
+        terraform {{ package }} -var-file=~/.fos-gridvcenter01/terraform.tfvars
+      register: command_result
+      args:
+        chdir: "/opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice/terraform-vsphere/fos-gridvcenter01/lib"
+      tags:
+        - fos-gridvcenter01
+
+    - debug: msg="{{ command_result.stdout }}"
+      tags:
+        - fos-gridvcenter01
+
+    - name: Running Terraform fos-vcenter01
+      shell: |
+        terraform init -var-file=~/.fos-vcenter01/terraform.tfvars
+        terraform {{ package }} -var-file=~/.fos-vcenter01/terraform.tfvars
+      register: command_result
+      args:
+        chdir: "/opt/stackstorm/packs/st2_chatops_aliases/playbooks/itservice/terraform-vsphere/fos-vcenter01/lib"
+      tags:
+        - fos-vcenter01
+
+    - debug: msg="{{ command_result.stdout }}"
+      tags:
+        - fos-vcenter01
