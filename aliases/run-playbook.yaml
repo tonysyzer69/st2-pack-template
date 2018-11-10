@@ -1,7 +1,7 @@
 ---
-name: chatops.ansible_terraform
+name: chatops.run-playbook
 action_ref: st2_chatops_aliases.run-playbook
-description: run terraform
+description: run run-playbook
 formats:
   - display: "run-playbook <commandoption> <vcenter>"
     representation:
