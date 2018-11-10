@@ -15,7 +15,7 @@ parameters:
   cmd:
     description: "Command to run"
     immutable: true
-    default: "/usr/local/bin/run-playbook --extra-vars='playbook-tag={{playbook-tag}} playbook-host={{playbook-host}}' --tags {{playbook-tag}}"
+    default: "/usr/local/bin/run-playbook {{playbook-host}}  {{playbook-tag}}"
   playbook-tag:
     description: " playbook-tag"
     type: string
