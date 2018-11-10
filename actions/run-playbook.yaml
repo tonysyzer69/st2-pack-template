@@ -1,6 +1,6 @@
 ---
-name: run-playbook
-description: run run-playbook
+name: terraform
+description: run terraform
 runner_type: local-shell-cmd
 entry_point: ""
 enabled: true
@@ -15,12 +15,12 @@ parameters:
   cmd:
     description: "Command to run"
     immutable: true
-    default: "/usr/local/bin/run-playbook {{playbook-host}}  {{playbook-tag}}"
-  playbook-tag:
-    description: " playbook-tag"
+    default: "/usr/bin/ansible-playbook /opt/stackstorm/packs/${ST2_ACTION_PACK_NAME}/playbooks/playbook_terraform.yml --extra-vars='vcenter={{vcenter}} commandoption={{commandoption}}' --tags {{vcenter}}"
+  vcenter:
+    description: "Vsphere vcenter"
     type: string
     required: true
-  playbook-host:
-    description: "host"
+  commandoption:
+    description: "plan or apply"
     type: string
     required: true
