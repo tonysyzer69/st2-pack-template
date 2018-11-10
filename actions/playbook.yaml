@@ -1,6 +1,6 @@
 ---
-name: run-playbook
-description: run run-playbook
+name: playbook
+description: run playbook
 runner_type: local-shell-cmd
 entry_point: ""
 enabled: true
@@ -15,7 +15,7 @@ parameters:
   cmd:
     description: "Command to run"
     immutable: true
-    default: "/usr/local/bin/run-playbook {{commandoption}}  {{vcenter}}"
+    default: "/usr/local/bin/playbook {{commandoption}}  {{vcenter}}"
   vcenter:
     description: "Vsphere vcenter"
     type: string

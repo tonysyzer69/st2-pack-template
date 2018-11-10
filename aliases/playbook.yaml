@@ -1,14 +1,14 @@
 ---
-name: chatops.run_playbook
-action_ref: st2_chatops_aliases.run-playbook
-description: run run-playbook
+name: chatops.playbook
+action_ref: st2_chatops_aliases.playbook
+description: run playbook
 formats:
-  - display: "run-playbook <commandoption> <vcenter>"
+  - display: "playbook <commandoption> <vcenter>"
     representation:
-      - "run-playbook {{ commandoption }} {{ vcenter }}"
+      - "playbook {{ commandoption }} {{ vcenter }}"
 result:
   format: |
-    run-playbook `{{ execution.parameters.commandoption }}` `{{ execution.parameters.vcenter }}`
+    playbook `{{ execution.parameters.commandoption }}` `{{ execution.parameters.vcenter }}`
     {% if execution.result.stderr %}
     *Exit Status*: `{{ execution.result.return_code }}`
     *Stderr:* ```{{ execution.result.stderr }}```
