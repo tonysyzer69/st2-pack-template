@@ -1,6 +1,6 @@
 ---
-name: terraform
-description: run terraform
+name: run-playbook
+description: run run-playbook
 runner_type: local-shell-cmd
 entry_point: ""
 enabled: true
