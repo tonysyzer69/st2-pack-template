@@ -1,5 +1,5 @@
 ---
-name: chatops.playbook
+name: chatops.ansible_playbook
 action_ref: st2_chatops_aliases.playbook
 description: run playbook
 formats:
