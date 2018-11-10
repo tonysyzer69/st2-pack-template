@@ -1,0 +1,30 @@
+---
+name: chatops.run-playbook
+action_ref: st2_chatops_aliases.run-playbook
+description: run run-playbook
+formats:
+  - display: "run-playbook <playbook-host> <playbook-tag>"
+    representation:
+      - "run-playbook {{ playbook-host }} {{ playbook-tag }}"
+result:
+  format: |
+    run-playbook `{{ execution.parameters.playbook-host }}` `{{ execution.parameters.playbook-tag }}`
+    {% if execution.result.stderr %}
+    *Exit Status*: `{{ execution.result.return_code }}`
+    *Stderr:* ```{{ execution.result.stderr }}```
+    *Stdout:*
+    {% endif %}
+    ```{{ execution.result.stdout }}```
+  extra:
+    slack:
+      color: "{% if execution.result.succeeded %}good{% else %}danger{% endif %}"
+      fields:
+        - title: Updated nodes
+          value: "{{ execution.result.stdout|regex_replace('(?!changed=1).', '')|wordcount }}"
+          short: true
+        - title: Executed in
+          value: ":timer_clock: {{ execution.elapsed_seconds | to_human_time_from_seconds }}"
+          short: true
+      footer: "{{ execution.id }}"
+      footer_icon: "https://stackstorm.com/wp/wp-content/uploads/2015/01/favicon.png"
+
