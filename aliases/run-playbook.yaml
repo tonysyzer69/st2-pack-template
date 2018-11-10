@@ -1,5 +1,5 @@
 ---
-name: chatops.run-playbook
+name: chatops.run_playbook
 action_ref: st2_chatops_aliases.run-playbook
 description: run run-playbook
 formats:
