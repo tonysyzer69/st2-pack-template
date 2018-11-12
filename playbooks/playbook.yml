@@ -13,7 +13,7 @@
       tags:
         - linux
     - copy:
-        src: /opt/stackstorm/packs/st2_chatops_aliases/playbooks/storage_map.csv
+        src: ~/git/itservice/terraform-vsphere/Bootstrap/storage_map.csv
         dest: /tmp/storage_map.csv
       tags:
         - linux
