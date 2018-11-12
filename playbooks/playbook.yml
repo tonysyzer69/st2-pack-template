@@ -7,7 +7,7 @@
         tags: keepalived }
   tasks:
     - copy:
-        src: /opt/stackstorm/packs/st2_chatops_aliases/playbooks/postinstall.sh
+        src: ~/git/itservice/terraform-vsphere/Bootstrap/postinstall.sh
         dest: /tmp/postinstall.sh
         mode: 0755
       tags:
