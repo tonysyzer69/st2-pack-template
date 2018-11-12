@@ -1,0 +1,27 @@
+---
+- hosts: all
+  roles:
+    - { role: haproxy,
+        tags: haproxy }
+    - { role: keepalived,
+        tags: keepalived }
+  tasks:
+    - copy:
+        src: /opt/stackstorm/packs/st2_chatops_aliases/playbooks/postinstall.sh
+        dest: /tmp/postinstall.sh
+        mode: 0755
+      tags:
+        - linux
+    - copy:
+        src: /opt/stackstorm/packs/st2_chatops_aliases/playbooks/storage_map.csv
+        dest: /tmp/storage_map.csv
+      tags:
+        - linux
+
+    - name: Run postinstall
+      become: yes
+      become_user: root
+      become_method: sudo
+      shell: "/tmp/postinstall.sh"
+      tags:
+        - linux
