@@ -58,11 +58,6 @@
         - terraform-init-fos-gridvcenter01
         - fos-gridvcenter01
 
-    - debug: msg="{{ output_terraform_init_fos_gridvcenter01.stdout }}"
-      tags:
-        - terraform-init-fos-gridvcenter01
-        - fos-gridvcenter01
-
     - name: Terraform init fos-vcenter01
       command: terraform init 
       register: output_terraform_init_fos_vcenter01
@@ -72,21 +67,11 @@
         - terraform-init-fos-vcenter01
         - fos-vcenter01
 
-    - debug: msg="{{ output_terraform_init_fos_vcenter01.stdout }}"
-      tags:
-        - terraform-init-fos-vcenter01
-        - fos-vcenter01
-
     - name: Terraform init sun-vcenter01
       command: terraform init 
       register: output_terraform_init_sun_vcenter01
       args:
         chdir: "~/git/itservice/terraform-vsphere/sun-vcenter01/lib"
-      tags:
-        - terraform-init-sun-vcenter01
-        - sun-vcenter01
-
-    - debug: msg="{{ output_terraform_init_sun_vcenter01.stdout }}"
       tags:
         - terraform-init-sun-vcenter01
         - sun-vcenter01
