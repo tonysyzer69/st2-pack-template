@@ -1,4 +1,4 @@
-r--
+---
 - hosts: 127.0.0.1
   gather_facts: no
   connection: local
