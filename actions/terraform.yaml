@@ -24,3 +24,11 @@ parameters:
     description: "plan or apply"
     type: string
     required: true
+  host:
+    description: "host"
+    type: string
+    required: false
+  role:
+    description: "role"
+    type: string
+    required: false
