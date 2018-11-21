@@ -25,3 +25,23 @@
       shell: "/tmp/postinstall.sh"
       tags:
         - linux
+
+    - name: Copy storage_map.csv
+      win_copy: src=~/git/itservice/terraform-vsphere/Bootstrap/storage_map.csv dest=c:\storage_map.csv
+      tags:
+        - windows
+
+    - name: Copy postinstall_win.ps1
+      win_copy: src=~/git/itservice/terraform-vsphere/Bootstrap/postinstall_win.ps1 dest=c:\postinstall_win.ps1
+      tags:
+        - windows
+
+    - name: Run postinstall_win.ps1
+      win_command: powershell.exe -ExecutionPolicy ByPass -File C:/postinstall_win.ps1
+      register: postinstall_win
+      tags:
+        - windows
+
+    - debug: msg="{{ postinstall_win.stdout }}"
+      tags:
+        - windows
