@@ -10,8 +10,8 @@ ack:
   enabled: false
 result:
   format: |
-    {% if execution.status == 'succeeded' %}Here is your cow: ```{{ execution.result.stdout }}``` {~}{% else %}
-    Sorry, no cows this time {~}
+    {% if execution.status == 'succeeded' %}Here is your output: ```{{ execution.result.stdout }}``` {~}{% else %}
+    Sorry, no ouput this time {~}
     Exit Code: `{{ execution.result.return_code }}`
     Stderr: ```{{ execution.result.stderr }}```
     Hint: Make sure `pdns` utility is installed.
