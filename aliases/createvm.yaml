@@ -3,9 +3,9 @@ name: chatops.createvm
 action_ref: st2_chatops_aliases.createvm
 description: add record to powerdns
 formats:
-  - display: "createvm <option> <ipaddress> <servername> <domain>"
+  - display: "createvm <servername>"
     representation:
-      - "createvm {{ option }} {{ ipaddress }} {{ servername }} {{ domain }}"
+      - "createvm {{ servername }}"
 ack:
   enabled: false
 result:

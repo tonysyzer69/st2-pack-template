@@ -13,20 +13,8 @@ parameters:
     description: "Command to run"
     type: string
     immutable: true
-    default: "/usr/bin/createvm {{ option }} {{ipaddress}} {{servername}} {{domain}}"
-  option:
-    description: "create or delete"
+    default: "/usr/bin/createvm {{ servername }}"
+  servername:
+    description: "server to create"
     type: string
     required: true
-  ipaddress:
-    description: "IP Address"
-    type: string
-    required: false
-  servername:
-    description: "Short name of host"
-    type: string
-    required: false
-  domain:
-    description: "domain"
-    type: string
-    required: false
