@@ -21,12 +21,12 @@ parameters:
   ipaddress:
     description: "IP Address"
     type: string
-    required: false
+    required: true
   servername:
     description: "Short name of host"
     type: string
-    required: false
+    required: true
   domain:
     description: "domain"
     type: string
-    required: false
+    required: true
