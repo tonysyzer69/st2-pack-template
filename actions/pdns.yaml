@@ -13,7 +13,11 @@ parameters:
     description: "Command to run"
     type: string
     immutable: true
-    default: "/usr/bin/pdns {{ipaddress}} {{servername}} {{domain}}"
+    default: "/usr/bin/pdns {{ option }} {{ipaddress}} {{servername}} {{domain}}"
+  option:
+    description: "create or delete"
+    type: string
+    required: true
   ipaddress:
     description: "IP Address"
     type: string
