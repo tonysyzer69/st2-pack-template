@@ -5,6 +5,8 @@
         tags: haproxy }
     - { role: keepalived,
         tags: keepalived }
+    - { role: pbis,
+        tags: pbis }
   tasks:
     - copy:
         src: ~/git/itservice/terraform-vsphere/Bootstrap/postinstall.sh
