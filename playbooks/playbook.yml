@@ -50,3 +50,13 @@
     - debug: msg="{{ postinstall_win.stdout }}"
       tags:
         - windows
+
+    - name: Run id svc-terraform
+      shell: id svc-terraform
+      register: svc_terraform
+      tags:
+        - pbis
+
+    - debug: msg="{{ svc_terraform.stdout }}"
+      tags:
+        - pbis
