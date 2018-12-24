@@ -10,7 +10,7 @@
       git:
         repo: git@git.zooxlabs.com:zooxco/itservice.git
         version: master
-        dest: ~/git/itservice
+        dest: /home/stanley/git/itservice
         accept_hostkey: yes
       register: output_plan_git_clone
       tags:
