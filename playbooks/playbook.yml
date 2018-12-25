@@ -31,6 +31,17 @@
       tags:
         - linux
 
+    - name: clean /tmp
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+        - /tmp/postinstall.sh
+        - /tmp/storage_map.csv
+        - /tmp/fdisktmp
+      tags:
+        - linux
+
     - name: Copy storage_map.csv
       win_copy: src=/home/stanley/git/itservice/terraform-vsphere/Bootstrap/storage_map.csv dest=c:\storage_map.csv
       tags:
