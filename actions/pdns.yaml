@@ -1,6 +1,6 @@
 ---
 name: pdns
-description: add ip address to powerdns
+description: create VM
 runner_type: local-shell-cmd
 entry_point: ""
 enabled: true
@@ -13,20 +13,8 @@ parameters:
     description: "Command to run"
     type: string
     immutable: true
-    default: "/usr/bin/pdns {{ option }} {{ipaddress}} {{servername}} {{domain}}"
-  option:
-    description: "create or delete"
-    type: string
-    required: true
-  ipaddress:
-    description: "IP Address"
-    type: string
-    required: true
-  servername:
-    description: "Short name of host"
-    type: string
-    required: true
-  domain:
-    description: "domain"
+    default: "/usr/bin/pdns {{ serverip }}"
+  serverip:
+    description: "ip to create"
     type: string
     required: true

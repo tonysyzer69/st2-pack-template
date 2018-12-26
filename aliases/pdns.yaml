@@ -3,9 +3,9 @@ name: chatops.pdns
 action_ref: st2_chatops_aliases.pdns
 description: add record to powerdns
 formats:
-  - display: "pdns <option> <ipaddress> <servername> <domain>"
+  - display: "pdns <serverip>"
     representation:
-      - "pdns {{ option }} {{ ipaddress }} {{ servername }} {{ domain }}"
+      - "pdns {{ serverip }}"
 ack:
   enabled: false
 result:
