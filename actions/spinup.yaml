@@ -15,7 +15,7 @@ parameters:
   cmd:
     description: "Command to run"
     immutable: true
-    default: "/usr/local/bin/spinup {{host}}"
+    default: "/usr/bin/spinup {{host}}"
   host:
     description: "host"
     type: string
