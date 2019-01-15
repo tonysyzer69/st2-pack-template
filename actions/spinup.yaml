@@ -7,7 +7,6 @@ enabled: true
 parameters:
   sudo:
     immutable: true
-    default: true
   kwarg_op:
     immutable: true
   timeout:
